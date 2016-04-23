@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_env_get.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 15:16:58 by eebersol          #+#    #+#             */
-/*   Updated: 2015/12/05 19:32:45 by eebersol         ###   ########.fr       */
+/*   Created: 2016/04/18 18:56:22 by eebersol          #+#    #+#             */
+/*   Updated: 2016/04/18 18:56:24 by eebersol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include <minishell.h>
 
-int		ft_strcmp(const char *s1, const char *s2)
+char	*ft_env_get(t_list *list, char *var)
 {
-	int i;
+	t_list	*cur;
+	t_env	*env;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	cur = list;
+	while (cur)
+	{
+		env = cur->content;
+		if (ft_strcmp(env->var, var) == 0)
+			return (env->value);
+		cur = cur->next;
+	}
+	return ("");
 }

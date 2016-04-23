@@ -17,6 +17,8 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
+# include "get_next_line.h"
 
 typedef struct		s_list
 {
@@ -25,6 +27,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_isalphanumeric(char *str);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -82,6 +85,16 @@ t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lstadd_back(t_list **alst, t_list *new);
+void				ft_lstdel_at(t_list **list, int at, void (*del)(void *,
+								size_t));
+void				ft_lstrev(t_list **list);
+void				ft_lstiter_if(t_list *lst, void (*f)(t_list *elem),
+								int (*g)(t_list *));
+void				ft_insertion_sort(t_list **list,
+									int (*f)(t_list *list_a, t_list *list_b));
+void				ft_sorted_insert(t_list **list, t_list *new_elem,
+									int (*f)(t_list *list_a, t_list *list_b));
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_part_nbr(const char *s, char c);
@@ -94,5 +107,9 @@ int					ft_isspace(int c);
 int					ft_xdigit(int c);
 int					ft_iscntrl(int c);
 char				*ft_freejoin(char *s1, char *s2);
+int					get_next_line(const int fd, char **line);
+char				**ft_word_to_tab(char const *s);
+int					ft_tab_len(char **tab);
+int					ft_tab_free(char ***tab);
 
 #endif

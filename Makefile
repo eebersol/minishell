@@ -10,33 +10,54 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 	= minishell
+#Define the program
+NAME			= minishell
+LIB				=	./libft/libft.a
+_SRC			= 	minishell.c \
+						ft_cd.c \
+						ft_exit.c \
+						ft_error.c \
+						ft_error_next.c \
+						ft_signal.c \
+						builtin_env/ft_env_set.c \
+						builtin_env/ft_env_unset.c \
+						builtin_env/ft_env_to_list.c \
+						builtin_env/ft_env_get.c \
+						builtin_env/ft_env_show.c \
+						builtin_env/ft_env_opt.c \
+						utils/ft_cut_title.c \
+						utils/ft_free_node.c \
+						utils/ft_get_path.c \
+						utils/ft_join_path.c \
+						utils/ft_lstlen.c \
+						utils/ft_seek_wrong_opt.c
 
-_SRCS 	= 
+INCLUDES		= -I./libft/includes/ -I./includes/
+SRC				= $(addprefix srcs/,$(_SRC))
+OBJ				= $(SRC:.c=.o)
+CFLAGS			= -Wall -Wextra -Werror -g -ggdb
 
-SRCS  	= $(addprefix srcs/,$(_SRCS))
-LIBFT 	= -Llibft -lft -Ilibft
-CFLAGS	= -Wall -Wextra -Werror
-CC 		= gcc $(CFLAGS)
+all: $(NAME)
 
-all		:$(NAME)
+$(NAME): $(OBJ)
+	make -C ./libft/
+	@gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME)
+	@echo $(NAME)" compiled"
 
-$(NAME)	:
-	@make -C libft
-	@$(CC) $(SRCS) -Iincludes -o $(NAME) $(LIBFT)
-	@echo $(NAME) "Compiled"
 
-clean	:
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+.PHONY: clean fclean re
+
+clean:
+	@rm -f $(OBJ)
+	@make clean -C libft
+	@echo "Clean all .o files"
+
+fclean:	clean
 	@make fclean -C libft
-	@/bin/rm -rf bin
-	@echo "Clean all .o"
-
-fclean	:
-	@make fclean -C libft
-	@/bin/rm -rf bin
 	@/bin/rm -rf $(NAME)
-	@echo "clean all .o .a"
+	@echo "Clean all .o and .a"
 
-re		: fclean all
-
-.PHONY: all, clean, fclean, re
+re: fclean all

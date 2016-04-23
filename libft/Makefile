@@ -69,9 +69,14 @@ _SRCS 	= ft_memset.c \
 		ft_lstnew.c \
 		ft_lstdelone.c \
 		ft_lstdel.c \
+		ft_lstdel_at.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 		ft_lstadd.c \
+		ft_lstadd_back.c \
+		ft_lstrev.c \
+		ft_lstiter_if.c \
+		ft_lstsort.c \
 		ft_strlenchar.c \
 		ft_part_nbr.c \
 		ft_len_int.c \
@@ -81,7 +86,12 @@ _SRCS 	= ft_memset.c \
 		ft_isspace.c \
 		ft_xdigit.c \
 		ft_freejoin.c \
-		ft_iscntrl.c 
+		ft_iscntrl.c \
+		get_next_line.c \
+		**ft_word_to_tab.c \
+		ft_tab_free.c \
+		ft_tab_len.c \
+		ft_isalphanumeric.c \
 
 SRCS 	= $(addprefix srcs/,$(_SRCS))
 

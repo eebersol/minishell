@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_isalphanumeric.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 15:16:58 by eebersol          #+#    #+#             */
-/*   Updated: 2015/12/05 19:32:45 by eebersol         ###   ########.fr       */
+/*   Created: 2016/04/19 21:05:22 by eebersol          #+#    #+#             */
+/*   Updated: 2016/04/19 21:05:24 by eebersol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include <libft.h>
 
-int		ft_strcmp(const char *s1, const char *s2)
+int		ft_isalphanumeric(char *str)
 {
 	int i;
 
 	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
+	while (str[i])
+	{
+		if (str[i] == '_' || str[i] == '/' || str[i] == ':' || str[i] == '-'
+			|| str[i] == ',' || ft_isalnum(str[i]) == 0)
+			return (1);
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	return (0);
 }

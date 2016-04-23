@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_cut_title.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 15:16:58 by eebersol          #+#    #+#             */
-/*   Updated: 2015/12/05 19:32:45 by eebersol         ###   ########.fr       */
+/*   Created: 2016/04/19 19:36:39 by eebersol          #+#    #+#             */
+/*   Updated: 2016/04/19 19:36:40 by eebersol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include <minishell.h>
 
-int		ft_strcmp(const char *s1, const char *s2)
+int		ft_cut_title(char *str)
 {
-	int i;
+	int j;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	j = 0;
+	while (str[j] != '=')
+		j++;
+	return (j);
 }

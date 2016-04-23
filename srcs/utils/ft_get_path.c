@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_get_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 15:16:58 by eebersol          #+#    #+#             */
-/*   Updated: 2015/12/05 19:32:45 by eebersol         ###   ########.fr       */
+/*   Created: 2016/04/19 19:36:29 by eebersol          #+#    #+#             */
+/*   Updated: 2016/04/19 19:36:30 by eebersol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include <minishell.h>
 
-int		ft_strcmp(const char *s1, const char *s2)
+char	*ft_get_path(t_list *env, char *cmd)
 {
-	int i;
+	char	**env_paths;
+	char	*path;
+	int		i;
 
 	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
+	env_paths = ft_strsplit(ft_env_get(env, "PATH"), ':');
+	while (env_paths[i])
+	{
+		path = ft_strjoin(env_paths[i], "/");
+		path = ft_freejoin(path, cmd);
+		if (access(path, X_OK) == 0)
+			return (path);
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	return (NULL);
 }
