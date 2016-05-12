@@ -23,7 +23,10 @@ void	ft_env_set(t_list **list, char *var, char *value)
 		env = cur->content;
 		if (ft_strcmp(env->var, var) == 0)
 		{
-			env->value = ft_strdup(value);
+			if (value)
+				env->value = ft_strdup(value);
+			else
+				env->value = ft_strnew(0);
 			return ;
 		}
 		cur = cur->next;
@@ -36,5 +39,4 @@ void	ft_env_set(t_list **list, char *var, char *value)
 			env->value = ft_strdup(value);
 		ft_lstadd_back(list, ft_lstnew(env, sizeof(t_env)));
 	}
-	return ;
 }

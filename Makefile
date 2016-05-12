@@ -11,13 +11,14 @@
 # **************************************************************************** #
 
 #Define the program
+
 NAME			= minishell
+
 LIB				=	./libft/libft.a
+
 _SRC			= 	minishell.c \
 						ft_cd.c \
 						ft_exit.c \
-						ft_error.c \
-						ft_error_next.c \
 						ft_signal.c \
 						builtin_env/ft_env_set.c \
 						builtin_env/ft_env_unset.c \
@@ -30,12 +31,21 @@ _SRC			= 	minishell.c \
 						utils/ft_get_path.c \
 						utils/ft_join_path.c \
 						utils/ft_lstlen.c \
-						utils/ft_seek_wrong_opt.c
+						utils/ft_seek_wrong_opt.c \
+						utils/ft_display_prompt.c\
+						error/ft_error_cd.c \
+						error/ft_error_env.c \
+						error/ft_error_exit.c \
+						error/ft_error_not_found.c \
+						error/ft_error_set_unset_env.c
 
 INCLUDES		= -I./libft/includes/ -I./includes/
+
 SRC				= $(addprefix srcs/,$(_SRC))
+
 OBJ				= $(SRC:.c=.o)
-CFLAGS			= -Wall -Wextra -Werror -g -ggdb
+
+CFLAGS			= -Wall -Wextra -Werror
 
 all: $(NAME)
 

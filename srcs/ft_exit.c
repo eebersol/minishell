@@ -35,7 +35,7 @@ int		ft_exit(char **cmd, t_list **list)
 	int i;
 
 	i = 0;
-	if ((ft_error_exit(cmd, cmd[1])) == 0)
+	if ((ft_error_exit(cmd)) == 0)
 	{
 		i = (cmd && cmd[1] ? ft_atoi(cmd[1]) : 0);
 		ft_tab_free(&cmd);

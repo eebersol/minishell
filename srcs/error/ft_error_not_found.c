@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalphanumeric.c                                :+:      :+:    :+:   */
+/*   ft_error_not_found.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/19 21:05:22 by eebersol          #+#    #+#             */
-/*   Updated: 2016/04/19 21:05:24 by eebersol         ###   ########.fr       */
+/*   Created: 2016/04/25 16:33:15 by eebersol          #+#    #+#             */
+/*   Updated: 2016/04/25 16:33:16 by eebersol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <minishell.h>
 
-int		ft_isalphanumeric(char *str)
+void	ft_error_not_found(char *varname)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (((ft_isalpha(str[i])) == 1 || str[i] == '_')
-			&& ((ft_isalnum(str[i])) == 1 || str[i] == '_'))
-			i++;
-		else
-			return (1);
-	}
-	return (0);
+	ft_putstr_fd(varname, 2);
+	ft_putendl_fd(": command not found", 2);
 }

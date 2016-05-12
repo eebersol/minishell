@@ -12,7 +12,8 @@
 
 #include <minishell.h>
 
-static void		ft_match_node(t_list *cur, t_list **list, char **cmd, int j)
+static t_list		*ft_match_node(t_list *cur,
+											t_list **list, char **cmd, int j)
 {
 	t_env	*env;
 	int		i;
@@ -22,16 +23,22 @@ static void		ft_match_node(t_list *cur, t_list **list, char **cmd, int j)
 	{
 		env = cur->content;
 		if (ft_strcmp(env->var, cmd[j]) == 0)
+		{
 			ft_lstdel_at(list, i, &ft_free_node);
-		cur = cur->next;
+			if (i == 1)
+				*list = cur->next;
+			return (*list);
+		}
+		else
+			cur = cur->next;
 		i++;
 	}
+	return (*list);
 }
 
-void			ft_env_unset(t_list **list, char **cmd)
+t_list				*ft_env_unset(t_list **list, char **cmd)
 {
 	t_list	*cur;
-	t_list	*tmp;
 	int		j;
 
 	j = 1;
@@ -40,12 +47,11 @@ void			ft_env_unset(t_list **list, char **cmd)
 		cur = *list;
 		while (cmd[j])
 		{
-			tmp = NULL;
-			ft_match_node(cur, list, cmd, j);
-			cur = *list;
+			cur = ft_match_node(cur, list, cmd, j);
 			if (cmd[j + 1] == NULL)
 				break ;
 			j++;
 		}
 	}
+	return (*list);
 }

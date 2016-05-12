@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_next.c                                    :+:      :+:    :+:   */
+/*   ft_error_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/21 19:30:16 by eebersol          #+#    #+#             */
-/*   Updated: 2016/04/21 19:30:17 by eebersol         ###   ########.fr       */
+/*   Created: 2016/04/25 16:32:46 by eebersol          #+#    #+#             */
+/*   Updated: 2016/04/25 16:32:47 by eebersol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_error_not_found(char *varname)
+int		ft_error_exit(char **cmd)
 {
-	ft_putstr_fd(varname, 2);
-	ft_putendl_fd(": command not found", 2);
+	if (cmd && cmd[1] && cmd[2])
+	{
+		ft_putstr_fd("exit: ", 2);
+		ft_putstr_fd(cmd[1], 2);
+		ft_putendl_fd(": unique numeric argument required", 2);
+		return (-1);
+	}
+	else
+		return (0);
 }
